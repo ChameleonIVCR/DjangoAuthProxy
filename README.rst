@@ -1,6 +1,6 @@
-=====
+==================
 DjangoAuthProxyApp
-=====
+==================
 
 AuthProxyApp is a Django app containing a single User Proxy model, which is shared between multiple
 Django instances.
