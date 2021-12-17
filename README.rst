@@ -40,3 +40,8 @@ TODO
 
 - REST endpoints to manage UserProxy instances
 - Erase UserProxy instances when Users are deleted
+
+BUILDING
+--------
+
+Run ``python -m build``

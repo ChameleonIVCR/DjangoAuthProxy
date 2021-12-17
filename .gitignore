@@ -2,5 +2,7 @@
 AuthProxyApp/
 templates/
 venv/
+dist/
+django_user_proxy.egg-info/
 db.sqlite3
 manage.py
