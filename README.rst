@@ -34,3 +34,9 @@ Quick start
 
 GenerateUserProxy will create the UserProxy on user login, and AddUserProxyToRequest will add the
 UserProxy to the request, where it can be obtained like this: request.user_proxy.
+
+TODO
+----
+
+- REST endpoints to manage UserProxy instances
+- Erase UserProxy instances when Users are deleted
