@@ -1,0 +1,5 @@
+AuthProxyApp/
+templates/
+venv/
+db.sqlite3
+manage.py
