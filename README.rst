@@ -19,12 +19,16 @@ Quick start
 
     INSTALLED_APPS = [
         ...
-        'auth_proxy',
+        'auth_proxy'
     ]
 
 2. Run ``python manage.py migrate`` to create the auth_proxy model.
 
-3. If you wish to use the included Middlewares, include them::
+3. To use the proxy, use ``auth_proxy.models.UserProxy`` on foreign relations (like OneToOne, ManyToMany, ManyToOne), instead of ``django.contrib.auth.models.User``. Remember that you're responsible of creating these proxies, unless you use the optional middlewares.
+
+Optional:
+
+4. If you wish to use the Middlewares, include them in settings like this::
 
     MIDDLEWARE_CLASSES = (
         ...
@@ -32,8 +36,37 @@ Quick start
         'auth_proxy.middleware.AddUserProxyToRequest'
     )
 
-GenerateUserProxy will create the UserProxy on user login, and AddUserProxyToRequest will add the
-UserProxy to the request, where it can be obtained like this: request.user_proxy.
+GenerateUserProxy will create the UserProxy on user login, and AddUserProxyToRequest will add the UserProxy to the request, where it can be obtained like this: request.user_proxy.
+
+5. A basic User model is included; it uses UUID as the primary key. To use this as your default User model, declare the following variable in your settings::
+
+    ...
+    AUTH_USER_MODEL = 'auth_proxy.models.User'
+
+6. An user router is included. It will route the following labels::
+
+    "admin",
+    "auth",
+    "profiles",
+    "sessions",
+    "oauth2_provider",
+    "contenttypes"
+
+To a database called ``users``, which you should define in settings (refer to https://docs.djangoproject.com/en/4.0/topics/db/multi-db/ for more instructions). To use this router,
+define the following in settings::
+
+    DATABASE_ROUTERS = [
+        ...
+        'auth_proxy.routers.UsersRouter'
+    ]
+
+Note that upper-most routers will have more importance to Django. If you wish to ensure the router will do its intended purpose, insert it in the first position.
+
+Requirements
+____________
+
+This UserProxy is intended to be a shared local reference to a User object found in a separate database. This architecture allows multiple Django instances to share the same Users,
+and permissions, while retaining the ability to reference User models.
 
 TODO
 ----
@@ -41,7 +74,7 @@ TODO
 - REST endpoints to manage UserProxy instances
 - Erase UserProxy instances when Users are deleted
 
-BUILDING
+Building
 --------
 
 Run ``python -m build``
