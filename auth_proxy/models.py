@@ -24,6 +24,9 @@ class UserProxy(models.Model):
             "user_id": self.user_id
         }
 
+    def __str__(self):
+        return str(self.user_id)
+
 
 class AbstractUser(AbstractBaseUser, PermissionsMixin):
     """
