@@ -38,12 +38,7 @@ Optional:
 
 GenerateUserProxy will create the UserProxy on user login, and AddUserProxyToRequest will add the UserProxy to the request, where it can be obtained like this: request.user_proxy.
 
-5. A basic User model is included; it uses UUID as the primary key. To use this as your default User model, declare the following variable in your settings::
-
-    ...
-    AUTH_USER_MODEL = 'auth_proxy.models.User'
-
-6. An user router is included. It will route the following labels::
+5. An user router is included. It will route the following labels::
 
     "admin",
     "auth",
@@ -68,7 +63,7 @@ ____________
 This UserProxy is intended to be a shared local reference to a User object found in a separate database. This architecture allows multiple Django instances to share the same Users,
 and permissions, while retaining the ability to reference User models.
 
-Hence, a shared database is needed, and it should be declared as "users" in all django instances.
+Hence, a shared database is needed, and it should be declared as "users" in all django instances. And a custom User model should be declared, with UUID as primary key.
 
 TODO
 ----

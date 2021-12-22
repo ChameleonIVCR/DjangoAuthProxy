@@ -114,15 +114,3 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
-
-
-class User(AbstractUser):
-    """
-    Custom User model with UUID as PK. Note that unique field migrations need to be done to ensure
-    unique UUID generation.
-    """
-    uuid = models.UUIDField(
-        default=uuid.uuid4, 
-        editable=False,
-        primary_key=True
-    )
