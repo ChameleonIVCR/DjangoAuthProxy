@@ -68,6 +68,8 @@ ____________
 This UserProxy is intended to be a shared local reference to a User object found in a separate database. This architecture allows multiple Django instances to share the same Users,
 and permissions, while retaining the ability to reference User models.
 
+Hence, a shared database is needed, and it should be declared as "users" in all django instances.
+
 TODO
 ----
 
