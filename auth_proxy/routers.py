@@ -43,6 +43,10 @@ class UsersRouter:
         """
         Make sure self.user_labels is only present in self.database_name.
         """
+        if db == self.database_name:
+            if app_label in self.user_labels:
+                return True
+            return False
+
         if app_label in self.user_labels:
-            return db == self.database_name
-        return None
+            return False
